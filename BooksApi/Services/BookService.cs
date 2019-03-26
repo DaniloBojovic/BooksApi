@@ -1,5 +1,6 @@
 ﻿using BooksApi.Models;
 using Microsoft.Extensions.Configuration;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,12 @@ namespace BooksApi.Services
         public Book Get(string id)
         {
             return _books.Find(book => book.Id == id).FirstOrDefault();
+        }
+
+        public Book Create(Book book)
+        {
+            _books.InsertOne(book);
+            return book;
         }
     }
 }
