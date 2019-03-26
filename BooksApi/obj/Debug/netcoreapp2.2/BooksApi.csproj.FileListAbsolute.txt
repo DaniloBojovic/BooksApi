@@ -1,0 +1,14 @@
+C:\dbojovic\Projects\BooksApi\BooksApi\bin\Debug\netcoreapp2.2\BooksApi.deps.json
+C:\dbojovic\Projects\BooksApi\BooksApi\bin\Debug\netcoreapp2.2\BooksApi.runtimeconfig.json
+C:\dbojovic\Projects\BooksApi\BooksApi\bin\Debug\netcoreapp2.2\BooksApi.runtimeconfig.dev.json
+C:\dbojovic\Projects\BooksApi\BooksApi\bin\Debug\netcoreapp2.2\BooksApi.dll
+C:\dbojovic\Projects\BooksApi\BooksApi\obj\Debug\netcoreapp2.2\BooksApi.csprojAssemblyReference.cache
+C:\dbojovic\Projects\BooksApi\BooksApi\obj\Debug\netcoreapp2.2\BooksApi.csproj.CoreCompileInputs.cache
+C:\dbojovic\Projects\BooksApi\BooksApi\obj\Debug\netcoreapp2.2\BooksApi.RazorAssemblyInfo.cache
+C:\dbojovic\Projects\BooksApi\BooksApi\obj\Debug\netcoreapp2.2\BooksApi.RazorAssemblyInfo.cs
+C:\dbojovic\Projects\BooksApi\BooksApi\obj\Debug\netcoreapp2.2\BooksApi.AssemblyInfoInputs.cache
+C:\dbojovic\Projects\BooksApi\BooksApi\obj\Debug\netcoreapp2.2\BooksApi.AssemblyInfo.cs
+C:\dbojovic\Projects\BooksApi\BooksApi\obj\Debug\netcoreapp2.2\BooksApi.RazorTargetAssemblyInfo.cache
+C:\dbojovic\Projects\BooksApi\BooksApi\bin\Debug\netcoreapp2.2\BooksApi.pdb
+C:\dbojovic\Projects\BooksApi\BooksApi\obj\Debug\netcoreapp2.2\BooksApi.dll
+C:\dbojovic\Projects\BooksApi\BooksApi\obj\Debug\netcoreapp2.2\BooksApi.pdb
