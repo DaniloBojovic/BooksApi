@@ -19,20 +19,38 @@ namespace BooksApi.Services
             _books = database.GetCollection<Book>("Books");
         }
 
-        public List<Book> Get()
+        public async Task<List<Book>> GetBookAsync()
         {
-            return _books.Find(book => true).ToList();
+            return await _books.Find(book => true).ToListAsync();
         }
 
-        public Book Get(string id)
+        public async Task<Book> Get(string id)
         {
-            return _books.Find(book => book.Id == id).FirstOrDefault();
+            return await _books.Find(book => book.Id == id).FirstOrDefaultAsync();
         }
 
-        public Book Create(Book book)
+        public async Task<Book> Create(Book book)
         {
-            _books.InsertOne(book);
+            await _books.InsertOneAsync(book);
             return book;
         }
+
+        public async Task Replace(string id, Book replaceBook)
+        {
+            await _books.ReplaceOneAsync(b => b.Id == id, replaceBook);
+        }
+
+        public async Task Update(string id, Book updateBook)
+        {
+            var filter = Builders<Book>.Filter.Eq(b => b.Id, id);
+            var update = Builders<Book>.Update.Set(x => x.Price, updateBook.Price);
+            await _books.UpdateOneAsync(filter, update);
+        }
+
+        public async Task Remove(string id)
+        {
+            await _books.DeleteOneAsync(book => book.Id == id);
+        }
+
     }
 }

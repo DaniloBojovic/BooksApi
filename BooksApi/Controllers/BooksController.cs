@@ -1,48 +1,56 @@
 ﻿using BooksApi.Models;
-using BooksApi.Services;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using MongoDB.Bson;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BooksApi.Controllers
+namespace BooksApi.Services
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class BooksController : ControllerBase
+    public class BookService
     {
-        private readonly BookService _bookService;
-
-        public BooksController(BookService bookService)
+        private readonly IMongoCollection<Book> _books;
+        public BookService(IConfiguration config)
         {
-            _bookService = bookService;
+            var client = new MongoClient(config.GetConnectionString("BooksDb"));
+            var database = client.GetDatabase("BooksDb");
+            _books = database.GetCollection<Book>("Books");
         }
 
-        [HttpGet]
-        public ActionResult<List<Book>> Get()
+        public async Task<List<Book>> GetBookAsync()
         {
-            return _bookService.Get();
+            return await _books.Find(book => true).ToListAsync();
         }
 
-        [HttpGet("{id}")]
-        public ActionResult<Book> Get(string id)
+        public async Task<Book> Get(string id)
         {
-            var book = _bookService.Get(id);
+            return await _books.Find(book => book.Id == id).FirstOrDefaultAsync();
+        }
 
-            if(book == null)
-            {
-                return NotFound();
-            }
-
+        public async Task<Book> Create(Book book)
+        {
+            await _books.InsertOneAsync(book);
             return book;
         }
 
-        [HttpPost]
-        public ActionResult<Book> Create([FromBody] Book book)
+        public async Task Replace(string id, Book replaceBook)
         {
-            _bookService.Create(book);
-            return CreatedAtRoute("GetBook", new { id = book.Id.ToString() }, book);
+            await _books.ReplaceOneAsync(b => b.Id == id, replaceBook);
         }
+
+        public async Task Update(string id, Book updateBook)
+        {
+            var filter = Builders<Book>.Filter.Eq(b => b.Id, id);
+            var update = Builders<Book>.Update.Set(x => x.Price, updateBook.Price);
+            await _books.UpdateOneAsync(filter, update);
+        }
+
+        public async Task Remove(string id)
+        {
+            await _books.DeleteOneAsync(book => book.Id == id);
+        }
+
     }
 }
